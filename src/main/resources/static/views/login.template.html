@@ -1,0 +1,41 @@
+<div class="body">
+	<div class="container">
+		<div class="login-box">
+
+			<div class="login-logo">
+				<div class="login-text">LOGIN</div>
+				<div class="brand-logo">
+					<img src="img/Novel_Pattern_logo.jpg" alt="logo">
+				</div>
+			</div>
+
+			<form ng-submit="$ctrl.login()" name="loginForm" novalidate>
+
+				<div class="input-group"
+					ng-class="{'has-error': (loginForm.userId.$invalid && loginForm.userId.$dirty), 'has-success': loginForm.userId.$valid }">
+					<input type="text" id="userId" name="userId"
+						placeholder="Enter User ID" ng-model="$ctrl.userId" required>
+					<p class="help-block"
+						ng-if="(loginForm.userId.$invalid && loginForm.userId.$dirty)">{{'Please
+						enter a valid user ID' }}</p>
+				</div>
+
+				<div class="input-group"
+					ng-class="{'has-error': (loginForm.password.$invalid && loginForm.password.$dirty), 'has-success': loginForm.password.$valid}">
+					<input type="password" id="password" name="password"
+						placeholder="Password" ng-model="$ctrl.password" ng-minlength="8"
+						required>
+					<p class="help-block"
+						ng-if="(loginForm.password.$invalid && loginForm.password.$dirty)">{{'Please
+						enter at least 8 characters' }}</p>
+				</div>
+
+				<button type="submit" class="btn btn-default pull-right">LOGIN</button>
+			</form>
+
+			<div ng-if="$ctrl.errorMessage" class="error">{{
+				$ctrl.errorMessage }}</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,302 @@
+body {
+    margin: 0 !important;
+    font-family: 'Arial', sans-serif !important;
+    height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100vw !important;
+    background-color: #f0f2f5 !important;
+}
+
+.admin-container {
+    width: 90vw;
+    max-width: 1200px;
+    height: 100vh;
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.admin-container h1, .admin-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+
+/* Modal styling */
+.special-requests-modal1 {
+    position: absolute;
+    top: 70px; /* Adjust according to your layout */
+    right:280px; /* Adjust according to your layout */
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px; /* Adjust width as needed */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+
+
+/* CSS for User Registration Form */
+.register-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.admin-input-group {
+    flex: 0 0 48%;
+    position: relative;
+}
+
+.admin-input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.admin-input-group input,
+.admin-input-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.admin-input-group .help-block {
+    color: #b94a48;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.register-form-container button {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Custom CSS for ui-select Roles Dropdown */
+.ui-select-bootstrap .ui-select-match {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+    display: block;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+    color: #333;
+}
+
+.ui-select-bootstrap .ui-select-match .ui-select-match-item {
+    margin-right: 6px;
+    padding: 2px 4px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    color: #333;
+}
+
+.ui-select-bootstrap .ui-select-match .ui-select-match-item .ui-select-match-item-close {
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.ui-select-bootstrap .ui-select-choices {
+    margin-top: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    max-width:300px;
+    overflow-y: auto;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+.ui-select-bootstrap .ui-select-choices .ui-select-choices-row {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #333;
+    background-color: none;
+    border-bottom: 1px solid #ccc;
+    display: inline; /* Ensure items are in a row */
+  
+}
+
+.ui-select-bootstrap .ui-select-choices .ui-select-choices-row:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.ui-select-bootstrap .ui-select-choices .ui-select-choices-row .ui-select-choices-row-inner {
+    display: inline-block; /* Ensure each item is inline */
+    padding: 2px 4px;
+    margin: 2px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+}
+
+.ui-select-bootstrap .ui-select-choices .ui-select-choices-row .ui-select-choices-row-inner:hover {
+    background-color: #eaeaea;
+}
+
+
+
+
+
+/* Upload Section */
+.upload-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.upload-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.upload-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.upload-container button {
+	width: auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-container button:hover {
+    background-color: #45a049;
+}
+
+
+
+
+/* Download Section */
+.download-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.download-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-top:5px;
+}
+
+.download-container select {
+    width: calc(50% - 10px);
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.download-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: auto;
+    display: inline-block;
+    margin-top: 10px;
+    text-align:center;
+}
+
+.download-container button:hover {
+    background-color: #45a049;
+}
+
+
+
+/* Common Styles */
+.help-block {
+    color: red;
+}
+
+.has-error input,
+.has-error select {
+    border-color: red;
+}
+
+.has-success input,
+.has-success select {
+    border-color: green;
+}
+
+.admin-input-group {
+    margin-bottom: 15px;
+}
+
+.admin-input-group p.help-block {
+    margin-top: 5px;
+}
+
+
+

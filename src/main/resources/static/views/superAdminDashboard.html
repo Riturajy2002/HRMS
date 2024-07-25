@@ -1,0 +1,302 @@
+ <div class="admin-container" ng-controller="SuperAdminController">
+
+	<!-- Header things -->
+	<div class="user-header">
+	
+		<!-- Company Logo -->
+		<div class="logo">
+			<img src="img/Novel_Pattern_logo1.jpg" width="180px" height="auto"
+				alt="Company Logo">
+		</div>
+
+		<!-- Welcome Message with User Name -->
+		<div class="welcome-message">
+			<h2 style="text-transform: uppercase; font-weight: bold;">WELCOME
+				{{ userData.username }}</h2>
+		</div>
+
+		<!-- Notification Bell Icon -->
+		<div class="notification-icon" ng-click="toggleNotifications()">
+			<img src="img/message_icon_box.png" width="30px" height="auto"
+				alt="Message Icon"> <span class="badge"
+				ng-show="unreadNotifications.length > 0">{{
+				unreadNotifications.length }}</span>
+		</div>
+
+		<!-- Special Requests Modal Icon Click Show Special Requests -->
+		<div class="special-requests-modal" ng-show="showRequestsModal"
+			ng-click="closeModal()">
+			<div class="request-item" ng-repeat="request in unreadNotifications">
+				<p><strong>Employee ID:</strong> {{ request.user.id }}</p>
+				<p><strong>Name:</strong> {{ request.user.username }}</p>
+				<p><strong>Designation:</strong> {{ request.user.designation }}</p>
+				<p><strong>Email ID:</strong> {{ request.user.emailId }}</p>
+				<p><strong>Contact No:</strong> {{ request.user.contactNo }}</p>
+				<p><strong>Special Request:</strong> {{ request.reason }}.</p>
+				<div class="button-container">
+					<button class="mark-read-btn" ng-click="markAsRead(request)">Mark
+						as Read</button>
+					<button class="close-request-btn" ng-click="closeRequest(request)">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- User Profile option -->
+		<div class="user-profile">
+			<div class="profile-image-wrapper">
+				<img id="profileImage"
+					ng-src="{{userData.profilePicUrl || 'img/profile_bydefault.jfif'}}"
+					alt="Profile Image" class="profile-image">
+				<button class="change-profile-btn"
+					ng-click="triggerFileInput($event)">+</button>
+			</div>
+			<input type="file" id="profilePicFileInput"
+				file-model="profilePicFile" style="display: none;"
+				onchange="angular.element(this).scope().uploadProfilePic(this.files)">
+			<div class="profile-dropdown">
+				<button ng-click="toggleProfile()">Profile</button>
+				<button ng-click="togglebackToUserScreen()">Apply Leaves</button>
+				<button ng-click="toggleSpecialRequest()">Special Request</button>
+				<button ng-click="logout()">Logout</button>
+			</div>
+
+
+			<!--Show Profile Section for the User -->
+			<div ng-show="showProfile" class="profile-section">
+				<!-- Profile Information -->
+				<p><strong>Employee ID:</strong> {{ userData.id }}</p>
+				<p><strong>Name:</strong> {{ userData.username }}</p>
+				<p><strong>Designation:</strong> {{ userData.designation }}</p>
+				<p><strong>Email ID:</strong> {{ userData.email_id }}</p>
+				<p><strong>Contact No:</strong> {{ userData.contactNo }}</p>
+			</div>
+
+
+			<!-- Special Request for the User -->
+			<div ng-show="showSpecialRequest" class="special-request-section">
+				<form name="specialRequestForm"
+					ng-submit="sendSpecialRequest(specialRequestForm)" novalidate>
+					<label for="reason">Write request you want to share</label>
+					<textarea name="reason" rows="2" cols="36"
+						ng-model="request.reason" ng-pattern="/^[a-zA-Z\s]*$/" required></textarea>
+					<div
+						ng-show="specialRequestForm.reason.$touched && specialRequestForm.reason.$invalid"
+						class="text-danger">
+						<div ng-show="specialRequestForm.reason.$error.required">This
+							field is required.</div>
+						<div ng-show="specialRequestForm.reason.$error.pattern">Only
+							alphabetic characters are allowed.</div>
+					</div>
+					<div class="Request-button-group">
+						<button type="button" class="Request-button-manager"
+							ng-disabled="specialRequestForm.$invalid"
+							ng-click="sendSpecialRequest('manager')">To Manager</button>
+						<button type="button" class="Request-button-hr"
+							ng-disabled="specialRequestForm.$invalid"
+							ng-click="sendSpecialRequest('hr')">To HR Manager</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- User Registration Form -->
+    <div class="register-form-container">
+        <h2>Register New User</h2>
+        <form ng-submit="checkUserExists()" name="registrationForm">
+
+            <!-- First Row -->
+            <div class="row">
+                <!-- Employee ID Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.id.$invalid && registrationForm.id.$dirty), 'has-success': registrationForm.id.$valid}">
+                    <label for="id">Employee ID:</label>
+                    <input type="text" id="id" name="id" ng-model="newUser.id" class="form-control" required>
+                    <p class="help-block"
+                        ng-if="registrationForm.id.$error.required && registrationForm.id.$dirty">
+                        Employee ID is required
+                    </p>
+                </div>
+				<!-- User-ID Field -->
+				<div class="admin-input-group"
+					ng-class="{'has-error': (registrationForm.userId.$invalid && registrationForm.userId.$dirty), 'has-success': registrationForm.userId.$valid}">
+					<label for="userId">User-ID:</label> <input type="text" id="userId"
+						name="userId" ng-model="newUser.userId" class="form-control"
+						required>
+					<p class="help-block"
+						ng-if="registrationForm.userId.$error.required && registrationForm.userId.$dirty">
+						Username is required</p>
+					<p class="help-block"
+						ng-if="registrationForm.userId.$error.minlength && registrationForm.userId.$dirty && !registrationForm.userId.$error.required">
+						Username must be at least 4 characters long</p>
+				</div>
+			</div>
+
+            <!-- Second Row -->
+			<div class="row">
+				<!-- Username Field -->
+				<div class="admin-input-group"
+					ng-class="{'has-error': (registrationForm.username.$invalid && registrationForm.username.$dirty), 'has-success': registrationForm.username.$valid}">
+					<label for="username">Username:</label> <input type="text"
+						id="username" name="username" ng-model="newUser.username"
+						class="form-control" required ng-pattern="/^[a-zA-Z\s_]+$/"
+						ng-minlength="4">
+					<p class="help-block"
+						ng-if="registrationForm.username.$error.required && registrationForm.username.$dirty">
+						Username is required</p>
+					<p class="help-block"
+						ng-if="registrationForm.username.$error.pattern && registrationForm.username.$dirty && !registrationForm.username.$error.required">
+						Only alphabetic characters, spaces, and underscores are allowed</p>
+					<p class="help-block"
+						ng-if="registrationForm.username.$error.minlength && registrationForm.username.$dirty && !registrationForm.username.$error.required && !registrationForm.username.$error.pattern">
+						Username must be at least 4 characters long</p>
+				</div>
+				<!-- Department Dropdown -->
+				<div class="admin-input-group">
+					<label for="department">Department:</label> <select id="department"
+						name="department" ng-model="newUser.department"
+						class="form-control" ng-change="getDesignations()" required>
+						<option value="" disabled selected>Select Department</option>
+						<option ng-repeat="department in departments"
+							value="{{department}}">{{department}}</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- Third Row -->
+			<div class="row">
+				<!-- Designation Field -->
+				<div class="admin-input-group">
+					<label for="designation">Designation:</label> <select
+						id="designation" name="designation" ng-model="newUser.designation"
+						class="form-control" required>
+						<option value="" disabled selected>Select Designation</option>
+						<option ng-repeat="designation in designations"
+							value="{{designation}}">{{designation}}</option>
+					</select>
+				</div>
+
+
+
+				<!-- Roles Dropdown using ui-select -->
+				<div class="admin-input-group">
+					<label for="role">Roles:</label>
+					<ui-select multiple tagging tagging-label="(new)"
+						ng-model="newUser.role" theme="bootstrap" close-on-select="false"
+						reset-search-input="false" required> <ui-select-match
+						placeholder="Select roles...">{{$item.name}}</ui-select-match> <ui-select-choices
+						repeat="role in roles | filter: $select.search">
+					<div ng-bind-html="getTrustedHtml(role.name) | highlight: $select.search">{{role.name}}</div>
+					</ui-select-choices> </ui-select>
+					<p class="help-block"
+						ng-if="registrationForm.role.$invalid && registrationForm.role.$dirty">
+						Roles is required</p>
+				</div>
+			</div>
+
+			<!-- Fourth Row -->
+            <div class="row">
+                <!-- Reporting Manager Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.reportingManager.$invalid && registrationForm.reportingManager.$dirty), 'has-success': registrationForm.reportingManager.$valid}">
+                    <label for="reportingManager">Reporting Manager:</label>
+                    <input type="text" id="reportingManager" name="reportingManager" ng-model="newUser.reportingManager"
+                        class="form-control" required>
+                    <p class="help-block"
+                        ng-if="registrationForm.reportingManager.$error.required && registrationForm.reportingManager.$dirty">
+                        Reporting Manager is required</p>
+                </div>
+                <!-- Email Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.email.$invalid && registrationForm.email.$dirty), 'has-success': registrationForm.email.$valid}">
+                    <label for="email">Email ID:</label>
+                    <input type="email" id="email" name="email" ng-model="newUser.email" class="form-control" required>
+                    <p class="help-block"
+                        ng-if="registrationForm.email.$error.required && registrationForm.email.$dirty">
+                        Email is required</p>
+                    <p class="help-block"
+                        ng-if="registrationForm.email.$error.email && registrationForm.email.$dirty && !registrationForm.email.$error.required">
+                        Invalid email format</p>
+                </div>
+            </div>
+
+            <!-- Fifth Row -->
+            <div class="row">
+                <!-- Contact Number Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.contactNumber.$invalid && registrationForm.contactNumber.$dirty), 'has-success': registrationForm.contactNumber.$valid}">
+                    <label for="contactNumber">Contact Number:</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" ng-model="newUser.contactNumber" class="form-control"
+                        required ng-pattern="/^[0-9]{10}$/">
+                    <p class="help-block"
+                        ng-if="registrationForm.contactNumber.$error.required && registrationForm.contactNumber.$dirty">
+                        Contact Number is required</p>
+                    <p class="help-block"
+                        ng-if="registrationForm.contactNumber.$error.pattern && registrationForm.contactNumber.$dirty && !registrationForm.contactNumber.$error.required">
+                        Contact Number must be 10 digits</p>
+                </div>
+               
+                <!-- Birth Date Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.birthDate.$invalid && registrationForm.birthDate.$dirty), 'has-success': registrationForm.birthDate.$valid}">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" id="birthDate" name="birthDate" ng-model="newUser.birthDate" class="form-control" required>
+                    <p class="help-block"
+                        ng-if="registrationForm.birthDate.$error.required && registrationForm.birthDate.$dirty">
+                        Birth Date is required</p>
+                </div>
+            </div>
+            <!-- Sixth Row -->
+            <div class="row">
+                <!-- Anniversary Date Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.anniversaryDate.$invalid && registrationForm.anniversaryDate.$dirty), 'has-success': registrationForm.anniversaryDate.$valid}">
+                    <label for="anniversaryDate">Anniversary Date:</label>
+                    <input type="date" id="anniversaryDate" name="anniversaryDate" ng-model="newUser.anniversaryDate"
+                        class="form-control" required>
+                    <p class="help-block"
+                        ng-if="registrationForm.anniversaryDate.$error.required && registrationForm.anniversaryDate.$dirty">
+                        Anniversary Date is required</p>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.password.$invalid && registrationForm.password.$dirty), 'has-success': registrationForm.password.$valid}">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" ng-model="newUser.password" class="form-control"
+                        required ng-minlength="8">
+                    <p class="help-block"
+                        ng-if="registrationForm.password.$error.required && registrationForm.password.$dirty">
+                        Password is required</p>
+                    <p class="help-block"
+                        ng-if="registrationForm.password.$error.minlength && registrationForm.password.$dirty && !registrationForm.password.$error.required">
+                        Password must be at least 8 characters long</p>
+                </div>
+            </div>
+
+            <!-- Seventh Row -->
+            <div class="row">
+                <!-- Total Leave Field -->
+                <div class="admin-input-group"
+                    ng-class="{'has-error': (registrationForm.totalLeave.$invalid && registrationForm.totalLeave.$dirty), 'has-success': registrationForm.totalLeave.$valid}">
+                    <label for="totalLeave">Total Leave:</label>
+                    <input type="number" id="totalLeave" name="totalLeave" ng-model="newUser.totalLeave" class="form-control"
+                        required min="0">
+                    <p class="help-block"
+                        ng-if="registrationForm.totalLeave.$error.required && registrationForm.totalLeave.$dirty">
+                        Total Leave is required</p>
+                    <p class="help-block"
+                        ng-if="registrationForm.totalLeave.$error.min && registrationForm.totalLeave.$dirty && !registrationForm.totalLeave.$error.required">
+                        Total Leave cannot be negative</p>
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="admin-input-group">
+                    <button type="submit" class="btn btn-primary"
+                        ng-disabled="registrationForm.$invalid">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>

@@ -1,0 +1,371 @@
+/* Body Styling */
+body {
+	margin: 0 !important;
+	font-family: 'Arial', sans-serif !important;
+	height: 100vh !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	width: 100vw !important;
+	background-color: #f0f2f5 !important;
+}
+
+/* Container Styling */
+.container1 {
+	border: none;
+	width: 100vw;
+	height: 100vh;
+	background-color: #fff;
+	color: #333;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+/* Header Styling */
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.welcome-message h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .profile-image-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #007bff;
+    position: relative;
+    background-color: #f0f0f0; /* Light gray background for better visibility */
+}
+
+.user-profile .profile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-profile .change-profile-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:17px;
+    height:20px;
+}
+
+.user-profile .profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.user-profile:hover .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Profile and Special Request Sections */
+.profile-section, .special-request-section {
+    position: absolute;
+    right: calc(100% + 10px); /* Positions the sections to the left of the user profile with a 10px gap */
+    top: 0;
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    z-index: 10;
+    margin-right: 24px;
+}
+
+.text-danger {
+    color: red;
+}
+
+
+.Request-button-group button {
+	margin: 10px 10px 0 0;
+	flex: 1;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display:space-between;
+	
+}
+
+.Request-button-group button:hover {
+	background-color: #0056b3;
+}
+
+/* Leave Status and Form Styling */
+.leave-request-status h3, .leave-application h3, .status h3 {
+	color: #333;
+	border-bottom: 2px solid #007bff;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+.filter-buttons {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.filter-buttons button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.filter-buttons button.active {
+	background-color: #0056b3;
+}
+
+.filter-buttons button:hover:not(.active) {
+	background-color: #0056b3;
+}
+
+.leave-application, .status {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.status {
+	margin-top: 30px;
+}
+
+.form-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.input-group {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.input-group label {
+	margin-bottom: 5px;
+	color: #333;
+	text-align: left;
+}
+
+.input-group select, .input-group input {
+	margin-bottom: 5px;
+	width: 100%;
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.closeFlexiModal {
+   font-size: 1.5rem;
+    text-align: center;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background: none;
+    color: red; /* Ensure the text is visible on the black background */
+    border: none;
+    appearance: none;
+    display: inline-block; /* Ensure it's displayed correctly */
+    width:5px;
+}
+
+.input-group textarea {
+	margin-bottom: 5px;
+	width: 100%;
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.input-group .text-danger {
+	color: red;
+}
+
+.Request-button-group {
+	display: flex;  /* Ensure the buttons are in a row */
+}
+
+.Request-button-group button {
+	margin: 10px 10px 0 0;
+	flex: 1;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: flex;
+	align-items: center;  /* Align items in the center vertically */
+	justify-content: center;  /* Align items in the center horizontally */
+	gap: 10px;
+}
+
+.Request-button-group button:hover {
+	background-color: #0056b3;
+}
+
+
+@media ( max-width : 750px) {
+	.form-row {
+		flex-direction: column;
+	}
+	.input-group, .button-group button {
+		width: 100%;
+		margin: 5px 0;
+	}
+}
+.button-group button {
+	margin: 10px 10px 0 0;
+	flex: 1;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: flex;
+	align-items: center;  /* Align items in the center vertically */
+	justify-content: center;  /* Align items in the center horizontally */
+	gap: 10px;
+	margin-top:25px;
+}
+
+.button-group button:hover {
+	background-color: #0056b3;
+}
+
+/* Table Styling */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ddd;
+}
+
+table th {
+	background-color: grey;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+	color: black;
+}
+
+td {
+	background-color: #f9f9f9;
+	color: black !important; /* Change text color to dark */
+}
+
+td:nth-child(odd) {
+	background-color: #fff;
+	color: black !important; /* Change text color to dark */
+}
+
+.table-container {
+	overflow-x: auto;
+}
+
+.cancel-request {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-request.pending {
+    background-color: orange;
+    color: white;
+}
+
+.cancel-request.cancelled {
+    background-color: red;
+    color: white;
+}
+
+.cancel-request.approved {
+    background-color: green;
+    color: white;
+}
+
+.cancel-request.declined {
+    background-color: grey;
+    color: white;
+}

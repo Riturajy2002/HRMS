@@ -1,0 +1,29 @@
+<!-- Modal-header -->
+<div class="modal-header">
+	<h2 class="modal-title">Enter Remarks</h2>
+</div>
+
+<!-- Modal body Form for Entering the reasons -->
+<div class="modal-body">
+	<form name="remarksForm">
+		<div class="form-group"
+			ng-class="{'has-error': remarksForm.remarks.$invalid && (remarksForm.remarks.$dirty || remarksForm.$submitted), 'has-success': remarksForm.remarks.$valid && remarksForm.remarks.$dirty}">
+			<textarea class="form-control" name="remarks" ng-model="remarks"
+				placeholder="Enter Reason" rows="2" cols="40" required></textarea>
+			<p class="help-block"
+				ng-if="remarksForm.remarks.$error.required && (remarksForm.remarks.$dirty || remarksForm.$submitted)">
+				Remarks are required.</p>
+
+		</div>
+	</form>
+</div>
+
+<!-- Modal-footer for submit or cancel the request -->
+<div class="modal-footer">
+	<button class="submit-primary" ng-click="submit()"
+		ng-disabled="remarksForm.$invalid || !remarks">Submit</button>
+	<button class="cancel-primary" ng-click="cancel()">Cancel</button>
+	<div
+		ng-show="remarksForm.$submitted && remarksForm.remarks.$error.required"
+		style="color: red;">Remarks are required.</div>
+</div>

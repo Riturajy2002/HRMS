@@ -1,0 +1,63 @@
+<div class></div>
+<!-- Modal Header--Title and Cancel option -->
+<div class="modal-header">
+	<h2 class="modal-title">User Details</h2>
+	<button class="close-button" ng-click="cancel()">&times;</button>
+</div>
+
+<div class="modal-body">
+	<!-- Modal body -- Getting Leave Requests status  remaining -->
+	<div class="leave-request-status1">
+		<h3>Leave Status</h3>
+		<header class="dash-header">
+			<div class="request-content">
+				<div class="filter-buttons">
+					<button ng-click="updateLeaveStatus('total')"
+						ng-class="{'active': leaveStatus === 'total'}">Total : {{
+						counts.total }}</button>
+					<button ng-click="updateLeaveStatus('available')"
+						ng-class="{'active': leaveStatus === 'available'}">Available
+						: {{ counts.available }}</button>
+					<button ng-click="updateLeaveStatus('approved')"
+						ng-class="{'active': leaveStatus === 'approved'}">Approved
+						: {{ counts.approved }}</button>
+					<button ng-click="updateLeaveStatus('declined')"
+						ng-class="{'active': leaveStatus === 'declined'}">Declined
+						: {{ counts.declined }}</button>
+				</div>
+			</div>
+		</header>
+	</div>
+
+
+	<!-- Modal body -- Getting Leave Requests status all in descending order -->
+	<div class="status1">
+		<h3>Leave Request Status</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Applied-Date</th>
+					<th>From-Date</th>
+					<th>To-Date</th>
+					<th>No. Of Days</th>
+					<th>Reason For Leave</th>
+					<th>Leave Type</th>
+					<th>Status</th>
+					<th>Manager Remarks</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="viewtabletd" ng-repeat="request in leaverequests">
+					<td>{{ request.appliedDate | date: 'dd/MM/yyyy'}}</td>
+					<td>{{ request.fromDate | date: 'dd/MM/yyyy' }}</td>
+					<td>{{ request.toDate | date: 'dd/MM/yyyy' }}</td>
+					<td>{{ request.numberOfDays }}</td>
+					<td>{{ request.reason }}</td>
+					<td>{{request.type}}</td>
+					<td>{{ request.status }}</td>
+					<td>{{ request.remarks }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

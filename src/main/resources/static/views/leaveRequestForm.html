@@ -1,0 +1,271 @@
+<div class="container1" ng-controller="LeaveformController">
+
+
+	<!-- Header things -->
+	<div class="user-header">
+		<!-- Company Logo -->
+		<div class="logo">
+			<img src="img/Novel_Pattern_logo1.jpg" width="180px" height="auto"
+				alt="Company Logo">
+		</div>
+
+		<!-- Welcome Message with User Name -->
+		<div class="welcome-message">
+			<h2 style="text-transform: uppercase; font-weight: bold;">WELCOME
+				{{ userData.username }}</h2>
+		</div>
+
+		<!-- User Profile option -->
+		<div class="user-profile">
+			<div class="profile-image-wrapper">
+				<img id="profileImage"
+					ng-src="{{userData.profilePicUrl || 'img/profile_bydefault.jfif'}}"
+					alt="Profile Image" class="profile-image">
+				<button class="change-profile-btn"
+					ng-click="triggerFileInput($event)">+</button>
+			</div>
+
+			<input type="file" id="profilePicFileInput"
+				file-model="profilePicFile" style="display: none;"
+				onchange="angular.element(this).scope().uploadProfilePic(this.files)">
+
+			<div class="profile-dropdown">
+				<button ng-click="toggleProfile()">Profile</button>
+
+
+				<!-- Show additional options based on roles -->
+				<!-- For Admin Roles -->
+				<button ng-if="isAdmin()" ng-click="toggleAddNewEmployees()">
+					Add Employee</button>
+				<button ng-if="isAdmin()" ng-click="showUploadModal()">
+					Update Attendance</button>
+
+				<button ng-if="isAdmin()" ng-click="showDownloadModal()">
+					Download Report</button>
+
+
+
+				<button ng-if="isManager()" ng-click="toggleManagerDashboard()">
+					Approve Request</button>
+
+
+
+				<!-- Show these options to all roles -->
+				<button ng-click="toggleSpecialRequest()">Special Request</button>
+				<button ng-click="logout()">Logout</button>
+			</div>
+
+
+			<!-- Profile Section for the User -->
+			<div ng-show="showProfile" class="profile-section">
+				<!-- Profile Information -->
+				<p>
+					<strong>Employee ID:</strong> {{ userData.id }}
+				</p>
+				<p>
+					<strong>Name:</strong> {{ userData.username }}
+				</p>
+				<p>
+					<strong>Designation:</strong> {{ userData.designation }}
+				</p>
+				<p>
+					<strong>Email ID:</strong> {{ userData.email_id}}
+				</p>
+				<p>
+					<strong>Contact No:</strong> {{ userData.contactNo }}
+				</p>
+			</div>
+
+
+			<!-- Special Request for the User -->
+			<div ng-show="showSpecialRequest" class="special-request-section">
+				<form name="specialRequestForm"
+					ng-submit="sendSpecialRequest(specialRequestForm)" novalidate>
+					<label for="reason">Write request you want to share</label>
+					<textarea name="reason" rows="2" cols="36"
+						ng-model="request.reason" ng-pattern="/^[a-zA-Z\s]*$/" required></textarea>
+
+					<div
+						ng-show="specialRequestForm.reason.$touched && specialRequestForm.reason.$invalid"
+						class="text-danger">
+						<div ng-show="specialRequestForm.reason.$error.required">This
+							field is required.</div>
+						<div ng-show="specialRequestForm.reason.$error.pattern">Only
+							alphabetic characters are allowed.</div>
+					</div>
+
+					<div class="Request-button-group">
+						<button type="button" class="Request-button-manager"
+							ng-disabled="specialRequestForm.$invalid"
+							ng-click="sendSpecialRequest('manager')">To Manager</button>
+						<button type="button" class="Request-button-hr"
+							ng-disabled="specialRequestForm.$invalid"
+							ng-click="sendSpecialRequest('hr')">To HR Manager</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Leave Status -->
+	<div class="leave-request-status">
+		<h3>Leave Status</h3>
+		<header class="dash-header">
+			<div class="request-content">
+				<div class="filter-buttons">
+					<button ng-click="updateLeaveStatus('total')"
+						ng-class="{'active': leaveStatus === 'total'}">Total: {{
+						counts.total }}</button>
+					<button ng-click="updateLeaveStatus('available')"
+						ng-style="{'background-color': counts.available >= 0 ? ' #007bff' : 'red' }"
+						ng-class="{'active': leaveStatus === 'available'}">
+						Available: {{ counts.available }}</button>
+					<button ng-click="updateLeaveStatus('approved')"
+						ng-class="{'active': leaveStatus === 'approved'}">Approved:
+						{{ counts.approved }}</button>
+					<button ng-click="updateLeaveStatus('declined')"
+						ng-class="{'active': leaveStatus === 'declined'}">Declined:
+						{{ counts.declined }}</button>
+				</div>
+			</div>
+		</header>
+	</div>
+
+
+	<div class="leave-application">
+		<h3>Apply for Leave</h3>
+		<form name="leaveForm" ng-submit="submitForm()">
+			<div class="form-row">
+				<div class="input-group">
+					<label for="type">Type</label> <select id="type"
+						ng-model="leaveRequest.type" class="form-control" required>
+						<option value="Medical">Medical</option>
+						<option value="Casual">Casual</option>
+						<option value="Flexi">Flexi</option>
+					</select>
+				</div>
+
+				<div class="input-group">
+					<label for="fromDate">From</label> <input type="date" id="fromDate"
+						ng-if="!isFlexiLeave" ng-model="leaveRequest.fromDate"
+						class="form-control" required ng-change="calculateDays()">
+					<input type="date" ng-if="isFlexiLeave" ng-click="openFlexiModal()"
+						ng-model="leaveRequest.fromDate" class="form-control"
+						placeholder="Select date" readonly>
+				</div>
+
+				<div class="input-group">
+					<label for="toDate">To</label> <input type="date" id="toDate"
+						ng-if="!isFlexiLeave" ng-model="leaveRequest.toDate"
+						class="form-control" required ng-change="calculateDays()">
+					<input type="date" ng-if="isFlexiLeave" ng-click="openFlexiModal()"
+						ng-model="leaveRequest.toDate" class="form-control"
+						placeholder="Select date" readonly>
+				</div>
+
+				<div class="input-group"
+					ng-class="{'has-error': leaveForm.numberOfDays.$error.invalidNumberOfDays}">
+					<label for="numberOfDays">No. of Days</label> <input type="number"
+						id="numberOfDays" name="numberOfDays"
+						ng-model="leaveRequest.numberOfDays" class="form-control" readonly>
+					<p class="help-block"
+						ng-if="leaveForm.numberOfDays.$error.invalidNumberOfDays && datesModified">
+						Number of days should be greater than zero.</p>
+				</div>
+
+				<div class="input-group">
+					<label for="reason">Reason for Leave</label>
+					<textarea id="reason" name="reason" rows="1"
+						ng-model="leaveRequest.reason" class="form-control"
+						ng-pattern="/^[a-zA-Z\s]*$/" required></textarea>
+					<div ng-show="leaveForm.reason.$error.pattern" class="text-danger">Only
+						alphabetic characters are allowed.</div>
+				</div>
+
+				<div class="input-group">
+					<label for="report_manager">Reporting Manager</label> <input
+						type="text" id="manager" ng-model="leaveRequest.manager"
+						class="form-control" readonly
+						value="{{leaveRequest.report_manager}}">
+				</div>
+
+				<div class="button-group">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Modal for Selecting Flexi Dates -->
+	<div class="modal" tabindex="-1" role="dialog" ng-show="showFlexiModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Select Flexi Date</h5>
+					<button type="button" class="closeFlexiModal"
+						ng-click="closeFlexiModal()">&times;</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Date</th>
+								<th>Day</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="date in flexiLeaveDays"
+								ng-click="selectFlexiDate(date)">
+								<td>{{ date.name }}</td>
+								<td>{{ date.date }}</td>
+								<td>{{ date.day }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Leave Request Status ------All Applied Leaves -->
+	<div class="status">
+		<h3>Leave Request Status</h3>
+		<div class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th>Applied-Date</th>
+						<th>From-Date</th>
+						<th>To-Date</th>
+						<th>No. Of Days</th>
+						<th>Reason For Leave</th>
+						<th>Leave Type</th>
+						<th>Status</th>
+						<th>Manage Request</th>
+						<th>Manager Remarks</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="request in leaverequests">
+						<td>{{ request.appliedDate | date: 'dd/MM/yyyy'}}</td>
+						<td>{{ request.fromDate | date: 'dd/MM/yyyy' }}</td>
+						<td>{{ request.toDate | date: 'dd/MM/yyyy' }}</td>
+						<td>{{ request.numberOfDays }}</td>
+						<td>{{ request.reason }}</td>
+						<td>{{request.type}}</td>
+						<td>{{ request.status }}</td>
+						<td>
+							<button class="cancel-request {{ request.status.toLowerCase() }}"
+								ng-click="cancelRequest(request)">Cancel Request</button>
+						</td>
+						<td>{{ request.remarks }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

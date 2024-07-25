@@ -1,0 +1,31 @@
+
+	<!-- Download Report Section -->
+	<div class="download-container">
+		<h2>Download User Report</h2>
+		<form name="downloadForm">
+			<div>
+				<label for="month">Month:</label> <select ng-model="selectedMonth"
+					id="month" ng-required="true">
+					<option value="" disabled>Select Month</option>
+					<option ng-repeat="month in months" value="{{month.value}}">{{month.name}}</option>
+				</select>
+				<p class="help-block"
+					ng-show="downloadForm.selectedMonth.$error.required">Please
+					select a month</p>
+			</div>
+			<div>
+				<label for="year">Year:</label> <select ng-model="selectedYear"
+					id="year" ng-required="true">
+					<option value="" disabled>Select Year</option>
+					<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
+				</select>
+				<p class="help-block"
+					ng-show="downloadForm.selectedYear.$error.required">Please
+					select a year</p>
+			</div>
+			<button class="admin-download-report-button"
+				ng-click="downloadReport()">Download</button>
+			<button class="admin-download-report-button" ng-click="cancel()"  style="background-color :red">Cancel</button>
+		</form>
+	</div>
+</div>
