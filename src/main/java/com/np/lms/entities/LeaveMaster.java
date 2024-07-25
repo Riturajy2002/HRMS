@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+//This is the entity table for types of the leaves.
 @Entity
 @Table(name = "leave_master")
 public class LeaveMaster {

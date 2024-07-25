@@ -15,7 +15,11 @@ angular.module('leaveManagementApp')
 			token: '',
 			roles: []
 		};
+<<<<<<< HEAD
            // new addition.
+=======
+         // Adding 
+>>>>>>> main
 		// Function to fetch user data from session storage and initialize $scope.userData
 		function initializeUserData() {
 			$scope.userData.id = $window.sessionStorage.id;
