@@ -1,5 +1,6 @@
-package com.np.lms.entities;
+package com.np.hrms.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,16 +21,21 @@ public class MonthlyReport {
 	private YearMonth reportYearMonth; // Changed type to YearMonth
 	private int availableLeaves;
 	private int approvedLeaves;
-	private int pendingLeaves;
-	private int declinedRequests;
 	private int lwpCount;
+    
+	@Column(name = "designation")
+	private String designation;
+	
+	@Column(name = "reporting_manager")
+	private String reporting_manager;
+	
 
 	public MonthlyReport() {
 		super();
 	}
 
 	public MonthlyReport(Long id, String userId, String userName, YearMonth reportYearMonth, int availableLeaves,
-			int approvedLeaves, int pendingLeaves, int declinedRequests, int lwpCount) {
+			int approvedLeaves, int lwpCount, String designation , String reporting_manager)  {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -37,9 +43,9 @@ public class MonthlyReport {
 		this.reportYearMonth = reportYearMonth;
 		this.availableLeaves = availableLeaves;
 		this.approvedLeaves = approvedLeaves;
-		this.pendingLeaves = pendingLeaves;
-		this.declinedRequests = declinedRequests;
 		this.lwpCount = lwpCount;
+		this.designation = designation;
+		this.reporting_manager = reporting_manager;
 	}
 
 	// Getters and setters
@@ -47,7 +53,23 @@ public class MonthlyReport {
 	public Long getId() {
 		return id;
 	}
+    
+	public String getDesignation() {
+		return designation;
+	}
 
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getReporting_manager() {
+		return reporting_manager;
+	}
+
+	public void setReporting_manager(String reporting_manager) {
+		this.reporting_manager = reporting_manager;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -90,22 +112,6 @@ public class MonthlyReport {
 
 	public void setApprovedLeaves(int approvedLeaves) {
 		this.approvedLeaves = approvedLeaves;
-	}
-
-	public int getPendingLeaves() {
-		return pendingLeaves;
-	}
-
-	public void setPendingLeaves(int pendingLeaves) {
-		this.pendingLeaves = pendingLeaves;
-	}
-
-	public int getDeclinedRequests() {
-		return declinedRequests;
-	}
-
-	public void setDeclinedRequests(int declinedRequests) {
-		this.declinedRequests = declinedRequests;
 	}
 
 	public int getLwpCount() {
