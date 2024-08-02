@@ -17,7 +17,8 @@ public class LeaveRequestService1 {
 
 	@Autowired
 	private LeaveRequestRepository leaveRequestRepository;
-
+    
+	// Getting all leaveRequests Applied by aligned employees under a manager.
 	public List<LeaveRequestDTO> getPendingLeaveRequests(String username) {
 		List<LeaveRequest> leaveRequests = leaveRequestRepository
 				.findPendingLeaveRequestsByReportManagerUsername(username);

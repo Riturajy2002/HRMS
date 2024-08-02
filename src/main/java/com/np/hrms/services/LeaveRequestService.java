@@ -30,7 +30,6 @@ public class LeaveRequestService {
 
 	// For updating LeaveRequest Status from pending to denied or Approve.
 	public LeaveRequest updateLeaveRequest(LeaveRequest leaveRequest) {
-
 		LeaveRequest leaveRequestData = null;
 		Optional<LeaveRequest> existingRequest = leaveRequestRepository.findById(leaveRequest.getId());
 		if (existingRequest.isPresent()) {

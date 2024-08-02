@@ -6,27 +6,37 @@ import org.springframework.stereotype.Repository;
 import com.np.hrms.entities.LeaveMaster;
 
 @Repository
-public interface LeaveMasterRepository extends JpaRepository<LeaveMaster,Long> {
-	
+public interface LeaveMasterRepository extends JpaRepository<LeaveMaster, Long> {
 
-    @Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Maternity'", nativeQuery = true)
-    int getMaternityMaxAllowedCount();
-    @Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Paternity'", nativeQuery = true)
-    int getPaternityMaxAllowedCount();
-    @Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Componsatory'", nativeQuery = true)
-    int  getComponsatoryMaxAllowedCount();
-    @Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Flexi'", nativeQuery = true)
-    int getFlexiMaxAllowedCount();
-    
-    @Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Maternity'", nativeQuery = true)
-    int getMaternityMaxDaysLimit();
-    
-    @Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Paternity'", nativeQuery = true)
-    int getPaternityMaxDaysLimit();
-    
-    @Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Componsatory'", nativeQuery = true)
-    int getComponsatoryMaxDaysLimit();
-    
-    @Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Flexi'", nativeQuery = true)
-    int getFlexiMaxDaysLimit();
+	// For Getting total apply time of Maternity leave for a employee in a Year.
+	@Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Maternity'", nativeQuery = true)
+	int getMaternityMaxAllowedCount();
+
+	// For Getting total apply time of Paternity leave for a employee in a Year.
+	@Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Paternity'", nativeQuery = true)
+	int getPaternityMaxAllowedCount();
+
+	// For Getting total apply time of Componsatory leave for a employee in a Year.
+	@Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Componsatory'", nativeQuery = true)
+	int getComponsatoryMaxAllowedCount();
+
+	// For Getting total apply time of Flexi leave for a employee in a Year.
+	@Query(value = "SELECT max_applicable FROM leave_master WHERE leave_name = 'Flexi'", nativeQuery = true)
+	int getFlexiMaxAllowedCount();
+
+	// For Finding the Maternity limit in a Year.
+	@Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Maternity'", nativeQuery = true)
+	int getMaternityMaxDaysLimit();
+
+	// For Finding the Paternity limit in a Year.
+	@Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Paternity'", nativeQuery = true)
+	int getPaternityMaxDaysLimit();
+
+	// For Finding the Componsatory limit in a Year.
+	@Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Componsatory'", nativeQuery = true)
+	int getComponsatoryMaxDaysLimit();
+
+	// For Finding the Flexi limit in a Year.
+	@Query(value = "SELECT no_of_days FROM leave_master WHERE leave_name = 'Flexi'", nativeQuery = true)
+	int getFlexiMaxDaysLimit();
 }

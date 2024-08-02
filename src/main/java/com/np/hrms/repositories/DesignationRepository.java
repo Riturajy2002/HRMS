@@ -11,10 +11,12 @@ import java.util.List;
 
 @Repository
 public interface DesignationRepository extends JpaRepository<Designation, Long> {
-
+    
+	// For getting all the departments.
 	@Query("SELECT DISTINCT d.department FROM Designation d")
 	List<String> findAllDepartments();
 
+	// For Finding the designations according to the selected department.
 	@Query(value = "SELECT designationNames FROM Designation WHERE department = :departmentName")
 	List<String> findDesignationNamesByDepartmentName(@Param("departmentName") String departmentName);
 

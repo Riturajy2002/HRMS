@@ -10,12 +10,13 @@ import java.util.List;
 
 @Repository
 public interface HolidayMasterRepository extends CrudRepository<HolidayMaster, Long> {
-
+    
+	 // Getting all Flexi Days Count.
 	@Query("SELECT h FROM HolidayMaster h WHERE h.type = 'Flexi' AND YEAR(h.date) = :year")
 	List<HolidayMaster> findAllFlexiLeavesForYear(@Param("year") int year);
 	
 	
-	
+	// Fetch fixed holidays from the database
 	@Query("SELECT h.date FROM HolidayMaster h WHERE h.type = 'Fixed' AND YEAR(h.date) = YEAR(CURRENT_DATE)")
 	List<Date> getFixedHolidaysForCurrentYear();
 

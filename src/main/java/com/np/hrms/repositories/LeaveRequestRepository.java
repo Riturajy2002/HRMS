@@ -34,45 +34,35 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
 	@Query("DELETE FROM LeaveRequest lr WHERE lr.id = :id")
 	void deleteRequestById(@Param("id") String id);
 
-	
-	
-	
-	
-	
-	
-	
+	// For Finding the total Maternity Applied Leave Count.
 	@Query(value = "SELECT COUNT(*) FROM leave_management.leave_request " + "WHERE type = 'Maternity' AND "
 			+ "status = 'Approved' AND " + "leave_operation_type = 'Debit' AND "
 			+ "EXTRACT(YEAR FROM applied_date) = EXTRACT(YEAR FROM CURRENT_DATE) AND "
 			+ "user_id = :userId", nativeQuery = true)
 	int getMaternityAppliedCount(@Param("userId") String userId);
 
+	// For Finding the total Paternity Applied Leave Count.
 	@Query(value = "SELECT COUNT(*) FROM leave_management.leave_request " + "WHERE type = 'Paternity' AND "
 			+ "status = 'Approved' AND " + "leave_operation_type = 'Debit' AND "
 			+ "EXTRACT(YEAR FROM applied_date) = EXTRACT(YEAR FROM CURRENT_DATE) AND "
 			+ "user_id = :userId", nativeQuery = true)
 	int getPaternityAppliedCount(@Param("userId") String userId);
 
+	// For Finding the total Componsatory Applied Leave Count.
 	@Query(value = "SELECT COUNT(*) FROM leave_management.leave_request " + "WHERE type = 'Componsatory' AND "
 			+ "status = 'Approved' AND " + "leave_operation_type = 'Debit' AND "
 			+ "EXTRACT(YEAR FROM applied_date) = EXTRACT(YEAR FROM CURRENT_DATE) AND "
 			+ "user_id = :userId", nativeQuery = true)
 	int getComponsatoryAppliedCount(@Param("userId") String userId);
 
+	// For Finding the total Flexi Applied Leave Count.
 	@Query(value = "SELECT COUNT(*) FROM leave_management.leave_request " + "WHERE type = 'Flexi' AND "
 			+ "status = 'Approved' AND " + "leave_operation_type = 'Debit' AND "
 			+ "EXTRACT(YEAR FROM applied_date) = EXTRACT(YEAR FROM CURRENT_DATE) AND "
 			+ "user_id = :userId", nativeQuery = true)
 	int getFlexiAppliedCount(@Param("userId") String userId);
 
-	
-	
-	
-	
-	
-	
-	
-	// For Checking no of count if any Type Credited leave
+	// For Checking no of count Maternity Type Credited leave
 	@Query(value = "SELECT COALESCE(SUM(number_of_days), 0) FROM leave_management.leave_request "
 			+ "WHERE type = 'Maternity' AND " + "leave_operation_type = 'Credit' AND " + "status = 'Approved'"
 			+ "AND user_id = :userId", nativeQuery = true)
@@ -108,12 +98,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
 			+ "AND user_id = :userId", nativeQuery = true)
 	int getMedicalTypeCredited(@Param("userId") String userId);
 
-	
-	
-	
-	
-	
-	
 	// For Checking no of count if any Maternity Type Debited leave
 	@Query(value = "SELECT COALESCE(SUM(number_of_days), 0) FROM leave_management.leave_request "
 			+ "WHERE type = 'Maternity' AND " + "leave_operation_type = 'Debit' AND " + "status = 'Approved'"
@@ -150,28 +134,16 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
 			+ "AND user_id = :userId", nativeQuery = true)
 	int getMedicalTypeDebited(@Param("userId") String userId);
 
-	
-	
-	
-	
+	// For Getting total taken Leave By the User.
 	@Query("SELECT COALESCE(SUM(l.numberOfDays), 0) FROM LeaveRequest l WHERE   l.leaveOperationType = 'Debit' AND l.user.id = :userId AND l.status = 'Approved'")
-	int getTotalDebitLeave( @Param("userId") String userId);
+	int getTotalDebitLeave(@Param("userId") String userId);
 
+	// for Getting total Creadted Leave in the Account of that User.
 	@Query("SELECT COALESCE(SUM(l.numberOfDays), 0) FROM LeaveRequest l WHERE   l.leaveOperationType = 'Credit' AND l.user.id = :userId AND l.status = 'Approved'")
-	int getTotalCreditLeave( @Param("userId") String userId);
+	int getTotalCreditLeave(@Param("userId") String userId);
 
+	// For Getting the Total Declined Request By the Employees.
 	@Query("SELECT COALESCE(SUM(l.numberOfDays), 0) FROM LeaveRequest l WHERE   l.status = 'Declined' AND l.leaveOperationType = 'Debit' AND l.user.id = :userId")
 	int getTotalDeclinedLeave(@Param("userId") String userId);
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
