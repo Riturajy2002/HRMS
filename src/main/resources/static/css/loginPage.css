@@ -1,3 +1,4 @@
+/* CSS for the login body */
 body {
 	margin: 0;
 	font-family: 'Arial', sans-serif;
@@ -9,31 +10,13 @@ body {
 	width: 100vw;
 }
 
+/* CSS for login container */
 .container {
 	text-align: center;
 	color: #333;
 }
 
-h1 {
-	margin-bottom: 50px;
-}
-
-.login-logo {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 20px;
-}
-
-.login-logo .login-text {
-	font-size: 24px;
-	font-weight: bold;
-}
-
-.brand-logo img {
-	width: 140px;
-}
-
+/* CSS for login box container */
 .login-box {
 	background: white;
 	padding: 30px;
@@ -42,12 +25,33 @@ h1 {
 	width: 400px;
 }
 
+/* CSS for login page logo container */
+.login-logo {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+/* CSS for login text */
+.login-logo .login-text {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+/* CSS for adjusting the logo */
+.brand-logo img {
+	width: 140px;
+}
+
+/* CSS for input groups */
 .input-group {
 	margin-bottom: 15px;
 	text-align: left;
 }
 
-input[type="text"], input[type="password"], input[type ="email"] {
+/* CSS for input fields */
+input[type="text"], input[type="password"] {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -56,17 +60,7 @@ input[type="text"], input[type="password"], input[type ="email"] {
 	font-size: 14px;
 }
 
-.action-links {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 15px;
-}
-
-.register a, .forgot-password a {
-	color: #4CAF50;
-	text-decoration: none;
-}
-
+/* CSS for the login button */
 button {
 	width: 100%;
 	padding: 10px;
@@ -78,22 +72,18 @@ button {
 	font-size: 16px;
 }
 
+/* CSS for the login button hover state */
 button:hover {
 	background-color: #45a049;
 }
 
-.help-block {
-	color: red;
-}
-.error{
+/* CSS for error messages */
+.help-block, .error {
 	color: red;
 	margin-top: 5px;
 }
 
-.error{
+/* CSS for error input fields */
+.has-error input {
 	border-color: red;
 }
-
-
-
-

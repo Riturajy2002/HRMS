@@ -10,7 +10,7 @@
 
 .modal-dialog {
 	position: fixed;
-	top: 40%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 60% !important;
@@ -20,21 +20,11 @@
 	z-index: 1050;
 	display: flex;
 	flex-direction: column;
+	max-height: 80%;
+	overflow: hidden;
 }
 
-.status1  h3 {
-	color: black;
-	font-size: 20px;
-	margin-top: 5px;
-}
-
-.leave-request-status1 h3 {
-	color: black;
-	font-size: 20px;
-	margin-top: 5px;
-}
-
-.modal-header h2 {
+.status1 h3, .leave-request-status1 h3, .modal-header h2 {
 	color: black;
 	font-size: 20px;
 	margin-top: 5px;
@@ -62,6 +52,7 @@
 	overflow-y: auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	max-height: calc(80vh - 50px); 
 }
 
 .close-button {
@@ -74,4 +65,28 @@
 
 .close-button:hover {
 	color: darkred;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+.table th, .table td {
+	border: 1px solid #e5e5e5;
+	padding: 8px;
+	text-align: left;
+}
+
+.table th {
+	background-color:#007bff;;
+}
+
+.table tbody tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+	background-color: #f1f1f1;
 }

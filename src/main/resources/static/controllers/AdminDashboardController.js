@@ -15,11 +15,6 @@ angular.module('leaveManagementApp')
 			token: '',
 			roles: []
 		};
-<<<<<<< HEAD
-           // new addition.
-=======
-         // Adding 
->>>>>>> main
 		// Function to fetch user data from session storage and initialize $scope.userData
 		function initializeUserData() {
 			$scope.userData.id = $window.sessionStorage.id;
@@ -122,154 +117,22 @@ angular.module('leaveManagementApp')
 			}
 		};
 
-		// For Showing the special Request Section
-		$scope.showSpecialRequest = false;
-		$scope.toggleSpecialRequest = function() {
-			$scope.showSpecialRequest = !$scope.showSpecialRequest;
-			if ($scope.showSpecialRequest) {
-				$scope.showProfile = false;
-			}
-		};
-
 		// Event Listener after the click 
 		document.addEventListener('click', function(event) {
 			var profileSection = document.querySelector('.profile-section');
-			var specialRequestSection = document.querySelector('.special-request-section');
 			var userProfile = document.querySelector('.user-profile');
 
 			var isClickInsideProfile = profileSection && profileSection.contains(event.target);
-			var isClickInsideSpecialRequest = specialRequestSection && specialRequestSection.contains(event.target);
 			var isClickInsideUserProfile = userProfile && userProfile.contains(event.target);
 
 			// when not clicked any of them then disappear these
-			if (!isClickInsideProfile && !isClickInsideSpecialRequest && !isClickInsideUserProfile) {
+			if (!isClickInsideProfile && !isClickInsideUserProfile) {
 				$scope.$apply(function() {
 					$scope.showProfile = false;
 					$scope.showSpecialRequest = false;
 				});
 			}
 		});
-
-		// Fetch unread special requests for the logged-in Hr-Admin
-		$scope.unreadNotificationsCount = 0;
-		var authToken = $scope.userData.token;
-
-		$http.get('http://localhost:8080/api/unreadSpecialRequests', {
-			params: { username: $scope.userData.designation },
-			headers: {
-				'Content-Type': 'application/json',
-				'auth-token': authToken
-			}
-		})
-			.then(function(response) {
-				$scope.unreadNotifications = response.data.filter(item => typeof item === 'object');
-				$scope.unreadNotificationsCount = $scope.unreadNotifications.length;
-			})
-			.catch(function(error) {
-				console.error('Error fetching unread special requests:', error);
-			});
-
-		// Toggle notifications modal
-		$scope.showRequestsModal = false;
-		$scope.toggleNotifications = function() {
-			$scope.showRequestsModal = !$scope.showRequestsModal;
-		};
-
-		// Mark special request as read
-		$scope.markAsRead = function(specialRequest) {
-			var requestData = { id: specialRequest.id };
-
-			$http.post('http://localhost:8080/api/markSpecialRequestAsRead', requestData, {
-				headers: {
-					'Content-Type': 'application/json',
-					'auth-token': authToken
-				}
-			})
-				.then(function() {
-					var index = $scope.unreadNotifications.indexOf(specialRequest);
-					if (index !== -1) {
-						$scope.unreadNotifications.splice(index, 1);
-						$scope.unreadNotificationsCount--; // Decrease count
-						alert("Special Request marked as Read Successfully.");
-						if ($scope.unreadNotificationsCount === 0) {
-							$scope.showRequestsModal = false;
-						}
-					}
-				})
-				.catch(function(error) {
-					console.error('Error marking special request as read:', error);
-				});
-		};
-
-		$scope.closeModal = function() {
-			$scope.showRequestsModal = false;
-		};
-
-		// Event listener to close modal when clicking outside
-		document.addEventListener('click', function(event) {
-			var notificationIcon = document.querySelector('.notification-icon');
-			var modal = document.querySelector('.special-requests-modal');
-
-			// Check if the click is inside the notification icon or modal
-			var isClickInsideIcon = notificationIcon && notificationIcon.contains(event.target);
-			var isClickInsideModal = modal && modal.contains(event.target);
-
-			// Close modal if clicked outside of icon and modal
-			if (!isClickInsideIcon && !isClickInsideModal) {
-				$scope.$apply(function() {
-					$scope.showRequestsModal = false;
-				});
-			}
-		});
-
-		// Function to send special request
-		$scope.sendSpecialRequest = function(recipientType) {
-			if ($scope.specialRequestForm.$valid) {
-				var specialRequest = {
-					recipient: recipientType,
-					reason: $scope.request.reason,
-					user: $scope.userData
-				};
-				$http.post('http://localhost:8080/api/specialRequest', specialRequest, {
-					headers: {
-						'Content-Type': 'application/json',
-						'auth-token': authToken
-					}
-				})
-					.then(function() {
-						alert("Special Request Submitted successfully");
-						$scope.request.reason = '';
-					})
-					.catch(function(error) {
-						console.error("Error details:", error); // Log the entire error object
-						alert("Failed to send special request. Error details: " + JSON.stringify(error));
-					});
-			}
-		};
-
-		$scope.showRequestsModal = false;
-
-		$scope.closeModal = function() {
-			$scope.showRequestsModal = false;
-		};
-
-		// Event listener to close modal when clicking outside
-		document.addEventListener('click', function(event) {
-			var notificationIcon = document.querySelector('.notification-icon');
-			var modal = document.querySelector('.special-requests-modal');
-
-			// Check if the click is inside the notification icon or modal
-			var isClickInsideIcon = notificationIcon && notificationIcon.contains(event.target);
-			var isClickInsideModal = modal && modal.contains(event.target);
-
-			// Close modal if clicked outside of icon and modal
-			if (!isClickInsideIcon && !isClickInsideModal) {
-				$scope.$apply(function() {
-					$scope.showRequestsModal = false;
-				});
-			}
-		});
-
 
 		// Function to toggle back to  employees view and redirect to /leave-Request-form page
 		$scope.togglebackToUserScreen = function() {
@@ -292,9 +155,6 @@ angular.module('leaveManagementApp')
 					alert('Error logging out:', response);
 				});
 		};
-
-
-
 
 		// Function to fetch leave requests based on user roles
 		function fetchLeaveRequests() {
@@ -397,7 +257,7 @@ angular.module('leaveManagementApp')
 					data: updateRequest,
 					headers: {
 						'Content-Type': 'application/json',
-						'auth-token': $scope.userData.token // Assuming userData.token is initialized properly
+						'auth-token': $scope.userData.token 
 					}
 				})
 					.then(function() {
@@ -502,27 +362,31 @@ angular.module('leaveManagementApp')
 			}
 			var empId = request.user.id;
 			// Fetch leave status based on userId
-			$scope.counts = {
-				total: 0,
-				available: 0,
-				approved: 0,
-				declined: 0
-			};
-			$http({
-				method: 'GET',
-				url: 'http://localhost:8080/api/leave-status/' + empId,
-				headers: {
-					'auth-token': $scope.userData.token
-				}
-			}).then(function(response) {
-				$scope.counts.total = response.data.total;
-				$scope.counts.available = response.data.available;
-				$scope.counts.approved = response.data.approved;
-				$scope.counts.declined = response.data.declined;
-			}).catch(function(error) {
-				alert('There was an error fetching the leave status. Please try again.');
-			});
+		$scope.counts = {
+			total: 0,
+			available: 0,
+			approved: 0,
+			declined: 0,
+		};
 
+		$http({
+			method: 'GET',
+			url: '/api/leave-status',
+			params: {
+				userId: empId
+			},
+			headers: {
+				'auth-token': $scope.userData.token
+			}
+		}).then(function(response) {
+			$scope.counts.total = response.data.total;
+			$scope.counts.available = response.data.available;
+			$scope.counts.approved = response.data.approved;
+			$scope.counts.declined = response.data.declined;
+		}).catch(function(error) {
+			console.error('Error fetching leave status:', error);
+			alert('There was an error fetching the leave status. Please try again.');
+		});
 
 			// Fetch all leave requests applied by the user based on userId
 			$scope.leaverequests = [];
