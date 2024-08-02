@@ -31,12 +31,12 @@ body {
 /* Modal styling */
 .special-requests-modal1 {
     position: absolute;
-    top: 70px; /* Adjust according to your layout */
-    right:280px; /* Adjust according to your layout */
+    top: 70px; 
+    right:280px; 
     background: white;
     border: 1px solid #ccc;
     padding: 10px;
-    width: 300px; /* Adjust width as needed */
+    width: 300px; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 1000;
 }
@@ -52,12 +52,16 @@ body {
     background-color: #f9f9f9;
 }
 
+/* Styling for rows in the form */
 .row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
+/* Styling for input groups */
 .admin-input-group {
     flex: 0 0 48%;
     position: relative;
@@ -68,21 +72,43 @@ body {
     margin-bottom: 5px;
 }
 
-.admin-input-group input,
-.admin-input-group select {
+/* General styles for all input fields */
+.admin-input-group input[type="text"],
+.admin-input-group input[type="email"],
+.admin-input-group input[type="password"],
+.admin-input-group input[type="tel"],
+.admin-input-group input[type="date"],
+.admin-input-group select,
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
     width: 100%;
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #fff;
 }
 
+/* Ensure specific fields don't exceed their intended width */
+.admin-input-group input[type="email"] {
+    max-width: 95%;
+}
+
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
+	 max-width: 95%;
+	}
+	 
+/* Ensure specific fields don't exceed their intended width */
+.admin-input-group input[type="date"] {
+    max-width: 95%;
+}
+/* Styling for help block text */
 .admin-input-group .help-block {
     color: #b94a48;
     font-size: 12px;
     margin-top: 5px;
 }
 
+/* Styling for primary buttons */
 .btn-primary {
     background-color: #007bff;
     color: #fff;
@@ -97,6 +123,7 @@ body {
     background-color: #0056b3;
 }
 
+/* Styling for registration form buttons */
 .register-form-container button {
     width: auto;
     padding: 10px 20px;
@@ -109,18 +136,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Custom CSS for ui-select Roles Dropdown */
-.ui-select-bootstrap .ui-select-match {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px;
-    display: block;
-    background-color: #fff;
-    position: relative;
-    cursor: pointer;
-    color: #333;
-}
-
+/* CSS for UI for roles using ui-select */
 .ui-select-bootstrap .ui-select-match .ui-select-match-item {
     margin-right: 6px;
     padding: 2px 4px;
@@ -136,12 +152,27 @@ body {
     cursor: pointer;
 }
 
+/* Override specific rules for the ui-select-search input */
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
+    max-width: 400% !important;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc !important; 
+    outline: none !important; 
+    height: auto !important;
+    margin-bottom: 0 !important; 
+    background-color: #fff; 
+    border-radius: 4px; 
+    color: #333 !important;
+}
+
+/* Styling for ui-select choices */
 .ui-select-bootstrap .ui-select-choices {
     margin-top: 2px;
     border: 1px solid #ccc;
     border-radius: 4px;
     max-height: 200px;
-    max-width:300px;
+    max-width: 300px;
     overflow-y: auto;
     background-color: #fff;
     z-index: 1000;
@@ -153,8 +184,7 @@ body {
     color: #333;
     background-color: none;
     border-bottom: 1px solid #ccc;
-    display: inline; /* Ensure items are in a row */
-  
+    display: inline; 
 }
 
 .ui-select-bootstrap .ui-select-choices .ui-select-choices-row:hover {
@@ -163,7 +193,7 @@ body {
 }
 
 .ui-select-bootstrap .ui-select-choices .ui-select-choices-row .ui-select-choices-row-inner {
-    display: inline-block; /* Ensure each item is inline */
+    display: inline-block; 
     padding: 2px 4px;
     margin: 2px;
     background-color: #f5f5f5;
@@ -176,9 +206,6 @@ body {
 .ui-select-bootstrap .ui-select-choices .ui-select-choices-row .ui-select-choices-row-inner:hover {
     background-color: #eaeaea;
 }
-
-
-
 
 
 /* Upload Section */

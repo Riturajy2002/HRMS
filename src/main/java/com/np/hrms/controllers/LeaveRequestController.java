@@ -98,7 +98,9 @@ public class LeaveRequestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error cancelling leave request.");
         }
     }
-	 
+	
+    
+    // For Showing the Leave Status on the User DashBoard.
 	@GetMapping("/leave-status")
 	@Secured({ Role.Admin, Role.User, Role.Manager })
 	public LeaveStatus getLeaveStatus(@RequestParam String userId) {
@@ -111,8 +113,7 @@ public class LeaveRequestController {
 		return leaveStatus;
 	}
 	
-	// Mthod for caculating the number of Days Excluding weekends and FixedHolidays
-	// as well.
+	// Mthod for caculating the number of Days Excluding weekends and FixedHolidays  as well.
 	private int calculateEffectiveLeaveDays(LocalDate fromDate, LocalDate toDate, List<LocalDate> fixedHolidays) {
 		int totalDays = 0;
 		LocalDate currentDate = fromDate;
@@ -135,8 +136,7 @@ public class LeaveRequestController {
 		return !(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
 	}
 
-	// Mthod for caculating the number of Days including weekends and FixedHolidays
-	// as well.
+	// Mthod for caculating the number of Days including weekends and FixedHolidays as well.
 	private int calculateDaysIncludingSandwichAndFixedHolidays(LocalDate fromDate, LocalDate toDate) {
 		int totalDays = 0;
 		LocalDate currentDate = fromDate;
