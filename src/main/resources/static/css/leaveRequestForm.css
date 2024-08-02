@@ -22,120 +22,124 @@ body {
 	box-sizing: border-box;
 	overflow-y: auto;
 }
+
 /* Header Styling */
 .user-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	padding: 10px 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 15px;
 }
 
+/*Leave Request Logo*/
 .logo img {
-    max-height: 50px;
+	max-height: 50px;
 }
 
+/* Welcome Meassage Text */
 .welcome-message h2 {
-    margin: 0;
-    color: #333;
-    font-size: 1.5em;
+	margin: 0;
+	color: #333;
+	font-size: 1.5em;
 }
 
+/*User_Profile Section*/
 .user-profile {
-    position: relative;
-    display: flex;
-    align-items: center;
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
+/*User Profile Image */
 .user-profile .profile-image-wrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #007bff;
-    position: relative;
-    background-color: #f0f0f0; /* Light gray background for better visibility */
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #007bff;
+	position: relative;
+	background-color: #f0f0f0;
 }
 
 .user-profile .profile-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .user-profile .change-profile-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width:17px;
-    height:20px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	font-size: 16px;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 17px;
+	height: 20px;
 }
 
 .user-profile .profile-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    z-index: 10;
+	display: none;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	overflow: hidden;
+	z-index: 10;
 }
 
 .user-profile:hover .profile-dropdown {
-    display: block;
+	display: block;
 }
 
 .profile-dropdown button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #fff;
-    color: #333;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	background-color: #fff;
+	color: #333;
+	text-align: left;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .profile-dropdown button:hover {
-    background-color: #f0f0f0;
+	background-color: #f0f0f0;
 }
 
-/* Profile and Special Request Sections */
-.profile-section, .special-request-section {
-    position: absolute;
-    right: calc(100% + 10px); /* Positions the sections to the left of the user profile with a 10px gap */
-    top: 0;
-    width: 300px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 15px;
-    z-index: 10;
-    margin-right: 24px;
+/* Profile  Sections */
+.profile-section {
+	position: absolute;
+	right: calc(100% + 10px);
+	top: 0;
+	width: 300px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	padding: 15px;
+	z-index: 10;
+	margin-right: 24px;
 }
 
 .text-danger {
-    color: red;
+	color: red;
 }
-
 
 .Request-button-group button {
 	margin: 10px 10px 0 0;
@@ -147,8 +151,7 @@ body {
 	padding: 10px;
 	box-sizing: border-box;
 	cursor: pointer;
-	display:space-between;
-	
+	display: space-between;
 }
 
 .Request-button-group button:hover {
@@ -226,17 +229,17 @@ body {
 }
 
 .closeFlexiModal {
-   font-size: 1.5rem;
-    text-align: center;
-    line-height: 1;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    background: none;
-    color: red; /* Ensure the text is visible on the black background */
-    border: none;
-    appearance: none;
-    display: inline-block; /* Ensure it's displayed correctly */
-    width:5px;
+	font-size: 1.5rem;
+	text-align: center;
+	line-height: 1;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	background: none;
+	color: red; 
+	border: none;
+	appearance: none;
+	display: inline-block; 
+	width: 5px;
 }
 
 .input-group textarea {
@@ -255,7 +258,7 @@ body {
 }
 
 .Request-button-group {
-	display: flex;  /* Ensure the buttons are in a row */
+	display: flex; 
 }
 
 .Request-button-group button {
@@ -269,15 +272,14 @@ body {
 	box-sizing: border-box;
 	cursor: pointer;
 	display: flex;
-	align-items: center;  /* Align items in the center vertically */
-	justify-content: center;  /* Align items in the center horizontally */
+	align-items: center; 
+	justify-content: center; 
 	gap: 10px;
 }
 
 .Request-button-group button:hover {
 	background-color: #0056b3;
 }
-
 
 @media ( max-width : 750px) {
 	.form-row {
@@ -288,6 +290,7 @@ body {
 		margin: 5px 0;
 	}
 }
+
 .button-group button {
 	margin: 10px 10px 0 0;
 	flex: 1;
@@ -299,10 +302,10 @@ body {
 	box-sizing: border-box;
 	cursor: pointer;
 	display: flex;
-	align-items: center;  /* Align items in the center vertically */
-	justify-content: center;  /* Align items in the center horizontally */
+	align-items: center;
+	justify-content: center;
 	gap: 10px;
-	margin-top:25px;
+	margin-top: 25px;
 }
 
 .button-group button:hover {
@@ -321,7 +324,7 @@ table, th, td {
 }
 
 table th {
-	background-color: grey;
+	background-color: #007bff;
 }
 
 th, td {
@@ -332,12 +335,12 @@ th, td {
 
 td {
 	background-color: #f9f9f9;
-	color: black !important; /* Change text color to dark */
+	color: black !important; 
 }
 
 td:nth-child(odd) {
 	background-color: #fff;
-	color: black !important; /* Change text color to dark */
+	color: black !important; 
 }
 
 .table-container {
@@ -345,27 +348,27 @@ td:nth-child(odd) {
 }
 
 .cancel-request {
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+	padding: 10px;
+	border: none;
+	cursor: pointer;
 }
 
 .cancel-request.pending {
-    background-color: orange;
-    color: white;
+	background-color: orange;
+	color: white;
 }
 
 .cancel-request.cancelled {
-    background-color: red;
-    color: white;
+	background-color: red;
+	color: white;
 }
 
 .cancel-request.approved {
-    background-color: green;
-    color: white;
+	background-color: green;
+	color: white;
 }
 
 .cancel-request.declined {
-    background-color: grey;
-    color: white;
+	background-color: grey;
+	color: white;
 }
